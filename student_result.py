@@ -1,44 +1,44 @@
-students = {}
 
-def add_student():
-    roll = input("Enter Roll Number: ")
-    name = input("Enter Student Name: ")
-    marks = float(input("Enter Marks: "))
+students = [
+    {"roll_no": 101, "name": "Jahnavi", "marks": 90},
+    {"roll_no": 102, "name": "Kiran", "marks": 78},
 
-    students[roll] = {
-        "name": name,
-        "marks": marks
-    }
+    # Two newly added student records
+    {"roll_no": 103, "name": "Rahul", "marks": 85},
+    {"roll_no": 104, "name": "Priya", "marks": 92}
+]
 
-    print("Student added successfully!")
 
-def view_students():
-    if not students:
-        print("No student records found.")
-        return
+def calculate_grade(marks):
+    if marks >= 90:
+        return "A+"
+    elif marks >= 80:
+        return "A"
+    elif marks >= 70:
+        return "B"
+    elif marks >= 60:
+        return "C"
+    elif marks >= 40:
+        return "D"
+    else:
+        return "Fail"
 
-    for roll, details in students.items():
-        print("\nRoll Number:", roll)
-        print("Name:", details["name"])
-        print("Marks:", details["marks"])
 
-def main():
-    while True:
-        print("\n===== STUDENT RESULT MANAGEMENT =====")
-        print("1. Add Student")
-        print("2. View Students")
-        print("3. Exit")
+def display_students():
+    print("\n----- STUDENT RESULT MANAGEMENT SYSTEM -----")
+    print("{:<10} {:<15} {:<10} {:<10}".format(
+        "Roll No", "Name", "Marks", "Grade"
+    ))
 
-        choice = input("Enter your choice: ")
+    for student in students:
+        grade = calculate_grade(student["marks"])
 
-        if choice == "1":
-            add_student()
-        elif choice == "2":
-            view_students()
-        elif choice == "3":
-            print("Thank you!")
-            break
-        else:
-            print("Invalid choice!")
+        print("{:<10} {:<15} {:<10} {:<10}".format(
+            student["roll_no"],
+            student["name"],
+            student["marks"],
+            grade
+        ))
 
-main()
+
+display_students()
